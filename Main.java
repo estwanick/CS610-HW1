@@ -7,7 +7,7 @@ public class Main {
         Integer[] a = {2,6,3,8,5};
         BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();
         for(Integer n : a) bst.insert(n);
-        // bst.preOrderTraversal();
+        bst.preOrderTraversal();
 
         bst.getRoot();
 
@@ -30,5 +30,9 @@ public class Main {
         int numInternalNodes = bst.numInternalNodes();
         System.out.print("Internal Nodes: ");
         System.out.println(numInternalNodes);
+
+        Node<Integer> searchNode = bst.search(2);
+        System.out.print("Search for Node: ");
+        System.out.println(searchNode);
     }
 }
