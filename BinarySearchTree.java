@@ -47,7 +47,6 @@ public class BinarySearchTree <T extends Comparable<T>>{
      ******************************************************/
 
     public Node<T> getRoot() {
-        System.out.println("Root: " + root);
         return root;
     }
 
@@ -59,23 +58,6 @@ public class BinarySearchTree <T extends Comparable<T>>{
         if(p == null) return 0;
         else return 1 + Math.max(depth(p.getLeftChild()), depth(p.getRightChild()));
     }
-//
-//    public T search(T toSearch) {
-//        return search(root, toSearch);
-//    }
-//
-//    public T search(Node<T> p, T toSearch) {
-//        if(p == null) {
-//            return toSearch;
-//        } else if(compare(toSearch, p.data) == 0) {
-//            return toSearch;
-//        } else if(compare(toSearch, p.data) < 0) {
-//            return search(p.left, toSearch);
-//        } else {
-//            return search(p.right, toSearch);
-//        }
-//    }
-
 
     public Node<T> search(T toSearch) {
         return search(root, toSearch);
@@ -147,6 +129,23 @@ public class BinarySearchTree <T extends Comparable<T>>{
         } else {
             return 1 + numInternalNodes(p.getLeftChild()) + numInternalNodes(p.getRightChild());
         }
+    }
+
+    public Node<T> findParent(T p) {
+        return findParent(p, root, null);
+    }
+
+    public Node<T> findParent(T p, Node<T> node, Node<T> parent)
+    {
+        if (node == null) {
+            return null;
+        } else if (compare(node.getData(), p) < 0) {
+            parent = findParent(p, node.getLeftChild(), node);
+            if (parent == null) {
+                parent = findParent(p, node.getRightChild(), node);
+            }
+        }
+        return parent;
     }
 
     /*************************************************
