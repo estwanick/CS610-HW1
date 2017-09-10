@@ -4,29 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //Test 1
-        System.out.println("Test 1---------------");
-        Integer[] a = {2,6,3,8,5};
-        describeBST(a, 2 ,6);
-
-        System.out.println("Test 2---------------");
-        //Test 2
-        Integer[] b = {2};
-        describeBST(b, 2, 2);
-
-        System.out.println("Test 3---------------");
-        //Test 3
-        Integer[] c = {5,4,6,3,7,2,8,1,9};
-        describeBST(c, 9, 9);
-
-        System.out.println("Test 4---------------");
-        //Test 4
-        Integer[] d = {11,3,7,2,8,5,4,6,3,7,2,8,1,9};
-        describeBST(d, 9, 9);
-
-    }
-
-    public static void describeBST(Integer[] arr, int sNode, int pNode){
+        Integer[] arr = {2,1,6,3,8,5};
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
         for(Integer n : arr) bst.insert(n);
         bst.preOrderTraversal();
@@ -35,16 +13,32 @@ public class Main {
         System.out.print("Root Node: ");
         System.out.println(rootNode);
 
-        Node<Integer> searchNode = bst.search(sNode);
-        System.out.print("Search for Node: ");
-        System.out.println(searchNode);
-        System.out.print("Left child for Node: ");
-        System.out.println(searchNode.getLeftChild());
-        System.out.print("Right child for Node: ");
-        System.out.println(searchNode.getRightChild());
+        boolean isRoot = bst.isRoot(2);
+        System.out.print("Is root?: " + 2 + " -> ");
+        System.out.println(isRoot);
 
-        Node<Integer> parentNode = bst.findParent(pNode);
-        System.out.print("Parent for Node is: ");
+        boolean isInternal = bst.isInternalNode(8);
+        System.out.print("Is internal?: " + 8 + " -> ");
+        System.out.println(isInternal);
+
+        boolean isExternal = bst.isExternalNode(8);
+        System.out.print("Is External?: " + 8 + " -> ");
+        System.out.println(isExternal);
+
+        Node<Integer> searchNode = bst.search(6);
+        System.out.print("Search for Node: " + 6 + " -> ");
+        System.out.println(searchNode);
+
+        Node<Integer> leftChild = bst.getLeftChild(6);
+        System.out.print("Left child for Node: " + 6 + " -> ");
+        System.out.println(leftChild);
+
+        Node<Integer> rightChild = bst.getRightChild(6);
+        System.out.print("Right child for Node: " + 6 + " -> ");
+        System.out.println(rightChild);
+
+        Node<Integer> parentNode = bst.findParent(6);
+        System.out.print("Parent for Node: " + 6 + " -> ");
         System.out.println(parentNode);
 
         int depth = bst.depth();
@@ -66,5 +60,6 @@ public class Main {
         int numInternalNodes = bst.numInternalNodes();
         System.out.print("Internal Nodes: ");
         System.out.println(numInternalNodes);
+
     }
 }

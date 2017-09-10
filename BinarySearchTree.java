@@ -21,11 +21,6 @@ public class BinarySearchTree <T extends Comparable<T>>{
         else return comparator.compare(x,y);
     }
 
-    /*****************************************************
-     *
-     *            INSERT
-     *
-     ******************************************************/
     public void insert(T data) {
         root = insert(root, data);
     }
@@ -40,11 +35,6 @@ public class BinarySearchTree <T extends Comparable<T>>{
         return p;
     }
 
-    /*****************************************************
-     *
-     *            TREE DESCRIPTORS
-     *
-     ******************************************************/
 
     public Node<T> getRoot() {
         return root;
@@ -59,8 +49,43 @@ public class BinarySearchTree <T extends Comparable<T>>{
         else return 1 + Math.max(depth(p.getLeftChild()), depth(p.getRightChild()));
     }
 
+    public boolean isRoot(T node){
+        Node parent = findParent(node);
+        if(parent == null && search(node) != null){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Node getLeftChild(T node){
+        return search(node).getLeftChild();
+    }
+
+    public Node getRightChild(T node){
+        return search(node).getRightChild();
+    }
+
     public Node<T> search(T toSearch) {
         return search(root, toSearch);
+    }
+
+    public boolean isInternalNode(T node){
+        Node foundNode = search(node);
+        if(foundNode.getLeftChild() != null || foundNode.getRightChild() != null){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isExternalNode(T node){
+        Node foundNode = search(node);
+        if(foundNode.getLeftChild() == null && foundNode.getRightChild() == null){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public Node<T> search(Node<T> p, T toSearch) {
@@ -147,12 +172,6 @@ public class BinarySearchTree <T extends Comparable<T>>{
         }
         return parent;
     }
-
-    /*************************************************
-     *
-     *            TRAVERSAL
-     *
-     **************************************************/
 
     public void preOrderTraversal() {
         preOrderHelper(root);
